@@ -23317,6 +23317,48 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             return bytes;
         },
 
+        changeType: function (value, conversionType) {
+            if(conversionType == null)
+            {
+                throw new System.ArgumentNullException.$ctor1("conversionType");
+            }
+
+            if (Bridge.referenceEquals(conversionType, System.Boolean))
+                return System.Convert.toBoolean(value);
+            if (Bridge.referenceEquals(conversionType, System.Char))
+                return System.Convert.toChar(value);
+            if (Bridge.referenceEquals(conversionType, System.SByte))
+                return System.Convert.toSByte(value);
+            if (Bridge.referenceEquals(conversionType, System.Byte))
+                return System.Convert.toByte(value);
+            if (Bridge.referenceEquals(conversionType, System.Int16))
+                return System.Convert.toInt16(value);
+            if (Bridge.referenceEquals(conversionType, System.UInt16))
+                return System.Convert.toUInt16(value);
+            if (Bridge.referenceEquals(conversionType, System.Int32))
+                return System.Convert.toInt32(value);
+            if (Bridge.referenceEquals(conversionType, System.UInt32))
+                return System.Convert.toUInt32(value);
+            if (Bridge.referenceEquals(conversionType, System.Int64))
+                return System.Convert.toInt64(value);
+            if (Bridge.referenceEquals(conversionType, System.UInt64))
+                return System.Convert.toUInt64(value);
+            if (Bridge.referenceEquals(conversionType, System.Single))
+                return System.Convert.toSingle(value);
+            if (Bridge.referenceEquals(conversionType, System.Double))
+                return System.Convert.toDouble(value);
+            if (Bridge.referenceEquals(conversionType, System.Decimal))
+                return System.Convert.toDecimal(value);
+            if (Bridge.referenceEquals(conversionType, System.DateTime))
+                return System.Convert.toDateTime(value);
+            if (Bridge.referenceEquals(conversionType, System.String))
+                return System.Convert.toString(value);
+            if (Bridge.referenceEquals(conversionType, System.Object))
+                return value;
+
+            throw new System.InvalidCastException.$ctor1("Invalid cast from '" + Bridge.Reflection.getTypeFullName(Bridge.getType(value)) + "' to '" + conversionType.$$fullname + "'.");
+        },
+
         convertToType: function (typeCode, value, formatProvider) {
             //TODO: #822 IConvertible
             throw new System.NotSupportedException.$ctor1("IConvertible interface is not supported.");
@@ -28314,7 +28356,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         ctors: {
             ctor: function (members, info, types, numItems) {
                 this.$initialize();
-
+                
                 this._members = members;
                 this._data = info;
                 this._types = types;
