@@ -565,6 +565,51 @@ namespace System
 
         #endregion FromBase64CharArray
 
+        [Bridge.Template("System.Convert.changeType({value}, {conversionType})")]
+        public static extern object ChangeType(object value, Type conversionType);
+        //{
+        //    if(conversionType == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(conversionType));
+        //    }
+
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Boolean]))
+        //        return Convert.ToBoolean(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Char]))
+        //        return Convert.ToChar(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.SByte]))
+        //        return Convert.ToSByte(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Byte]))
+        //        return Convert.ToByte(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Int16]))
+        //        return Convert.ToInt16(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.UInt16]))
+        //        return Convert.ToUInt16(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Int32]))
+        //        return Convert.ToInt32(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.UInt32]))
+        //        return Convert.ToUInt32(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Int64]))
+        //        return Convert.ToInt64(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.UInt64]))
+        //        return Convert.ToUInt64(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Single]))
+        //        return Convert.ToSingle(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Double]))
+        //        return Convert.ToDouble(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Decimal]))
+        //        return Convert.ToDecimal(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.DateTime]))
+        //        return Convert.ToDateTime(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.String]))
+        //        return Convert.ToString(value);
+        //    if (ReferenceEquals(conversionType, ConvertTypes[(int)TypeCode.Object]))
+        //        return (Object)value;
+
+        //    throw new InvalidCastException(string.Format("Invalid cast from '{0}' to '{1}'.", value.GetType().FullName, conversionType.FullName));
+
+        //}
+
         //A typeof operation is fairly expensive (does a system call), so we'll cache these here
         //statically.  These are exactly lined up with the TypeCode, eg. ConvertType[TypeCode.Int16]
         //will give you the type of an Int16.
