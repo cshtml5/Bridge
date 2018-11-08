@@ -18036,10 +18036,22 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             ctor: function (uriString) {
                 this.$initialize();
                 this.absoluteUri = uriString;
+                this.originalString = uriString;
+            },
+
+            ctor: function (uriString, uriKind) {
+                this.$initialize();
+                this.absoluteUri = uriString;
+                this.originalString = uriString;
+                this.uriKind = uriKind;
             },
 
             getAbsoluteUri: function () {
                 return this.absoluteUri;
+            },
+
+            getOriginalString: function () {
+                return this.originalString;
             },
 
             toJSON: function () {
