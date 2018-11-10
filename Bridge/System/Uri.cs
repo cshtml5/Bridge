@@ -21,5 +21,13 @@
 
         [Bridge.Template("System.Uri.notEquals({uri1}, {uri2})")]
         public static extern bool operator !=(Uri uri1, Uri uri2);
+
+        /// <summary>
+        /// Converts a string to its escaped representation.
+        /// </summary>
+        /// <param name="data">The string to escape.</param>
+        /// <returns>A System.String that contains the escaped representation of stringToEscape.</returns>
+        [Bridge.Template("encodeURIComponent({data})")]
+        public static extern string EscapeDataString(string data);
     }
 }
