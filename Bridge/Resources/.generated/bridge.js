@@ -23357,6 +23357,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 return value;
 
             throw new System.InvalidCastException.$ctor1("Invalid cast from '" + Bridge.Reflection.getTypeFullName(Bridge.getType(value)) + "' to '" + conversionType.$$fullname + "'.");
+
         },
 
         convertToType: function (typeCode, value, formatProvider) {
@@ -28368,7 +28369,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         ctors: {
             ctor: function (members, info, types, numItems) {
                 this.$initialize();
-                
+
                 this._members = members;
                 this._data = info;
                 this._types = types;
