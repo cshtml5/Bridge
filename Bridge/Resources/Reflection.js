@@ -658,7 +658,7 @@
                 if (md) {
                     var ctors = Bridge.Reflection.getMembers(constructor, 1, 28),
                         found;
-
+                    var bestCtorSoFar = undefined;
                     for (var j = 0; j < ctors.length; j++) {
                         var ctor = ctors[j];
 
@@ -676,10 +676,45 @@
                             }
 
                             if (found) {
-                                constructor = constructor[ctor.sn];
+                                var reverse = false;
+                                var isOK = true;
+                                if (bestCtorSoFar != undefined) {
+                                    var canReverse = true;
+                                    for (var l = 0; l < ctor.p.length; l++) {
+                                        if (!reverse) {
+                                            if (Bridge.Reflection.isAssignableFrom(bestCtorSoFar.p[l], ctor.p[l])) {
+                                                canReverse = false;
+                                            }
+                                            else {
+                                                if (!canReverse) {
+                                                    isOK = false;
+                                                    break;
+                                                }
+                                                else {
+                                                    reverse = true;
+                                                    if (Bridge.Reflection.isAssignableFrom(ctor.p[l], bestCtorSoFar.p[l])) {
+                                                        isOk = false;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (isOK) {
+                                    if (!reverse) {
+                                        if (bestCtorSoFar != undefined) {
+                                            count--;
+                                        }
+                                        bestCtorSoFar = ctor;
+                                    }
+                                }
                                 count++;
                             }
                         }
+                    }
+                    if (bestCtorSoFar != undefined) {
+                        constructor = constructor[bestCtorSoFar.sn];
                     }
                 } else {
                     if (Bridge.isFunction(constructor.ctor) && constructor.ctor.length === args.length) {
