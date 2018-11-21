@@ -32382,6 +32382,19 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         }
     });
 
+    // @source UriKind.js
+
+    Bridge.define("System.UriKind", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                RelativeOrAbsolute: 0,
+                Absolute: 1,
+                Relative: 2
+            }
+        }
+    });
+
     // @source DBNull.js
 
     Bridge.define("System.DBNull", {
