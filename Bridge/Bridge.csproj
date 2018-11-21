@@ -745,6 +745,7 @@
     <Content Include="Resources\.generated\System\UnauthorizedAccessException.js" />
     <Content Include="Resources\.generated\System\UnhandledExceptionEventArgs.js" />
     <Content Include="Resources\.generated\System\UnitySerializationHolder.js" />
+    <Content Include="Resources\.generated\System\UriKind.js" />
     <Content Include="Resources\.generated\System\Version.js" />
     <Content Include="Resources\.generated\System\Version\ParseFailureKind.js" />
     <Content Include="Resources\.generated\System\Version\VersionResult.js" />
