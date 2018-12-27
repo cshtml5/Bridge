@@ -42924,12 +42924,10 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             fields: {
-                separatorsArray: 0,
                 ZERO_CHAR_VALUE: 0
             },
             ctors: {
                 init: function () {
-                    this.separatorsArray = 46;
                     this.ZERO_CHAR_VALUE = 48;
                 }
             },
@@ -42972,7 +42970,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                         return false;
                     }
 
-                    var parsedComponents = System.String.split(version, [System.Version.separatorsArray].map(function (i) {{ return String.fromCharCode(i); }}));
+                    var parsedComponents = System.String.split(version, [46].map(function (i) {{ return String.fromCharCode(i); }}));
                     var parsedComponentsLength = parsedComponents.length;
 
                     if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
