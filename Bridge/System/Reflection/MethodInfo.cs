@@ -89,9 +89,6 @@ namespace System.Reflection
         [Bridge.Template("Bridge.Reflection.midel({this}, {obj})({*arguments})", "Bridge.Reflection.midel({this}, {obj}).apply(null, {arguments:array})")]
         public extern object Invoke(object obj, params object[] arguments);
 
-        [Bridge.Template("Bridge.Reflection.midel({this}, {obj}, {typeArguments})({*arguments})", "Bridge.Reflection.midel({this}, {obj}, {typeArguments}).apply(null, {arguments:array})")]
-        public extern object Invoke(object obj, Type[] typeArguments, params object[] arguments);
-
         /// <summary>
         /// Script name of the method. Null if the method has a special implementation.
         /// </summary>
