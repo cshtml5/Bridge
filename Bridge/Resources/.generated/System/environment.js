@@ -90,7 +90,7 @@
                     this.ExitCode = 0;
                 },
                 ctor: function () {
-                    System.Environment.Variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                    System.Environment.Variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor();
                     System.Environment.PatchDictionary(System.Environment.Variables);
                 }
             },
@@ -117,7 +117,7 @@
                         throw new System.ArgumentNullException.$ctor1(name);
                     }
 
-                    $t = Bridge.getEnumerator(System.Environment.Variables);
+                    $t = Bridge.getEnumerator(System.Environment.Variables, "getEnumerator");
                     try {
                         while ($t.moveNext()) {
                             var pair = $t.Current;
@@ -185,7 +185,7 @@
                     return System.Environment.GetEnvironmentVariable(variable);
                 },
                 GetEnvironmentVariables: function () {
-                    return System.Environment.PatchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String))(System.Environment.Variables));
+                    return System.Environment.PatchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor(System.Environment.Variables));
                 },
                 GetEnvironmentVariables$1: function (target) {
                     return System.Environment.GetEnvironmentVariables();
