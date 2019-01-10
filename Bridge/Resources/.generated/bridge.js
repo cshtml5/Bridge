@@ -1,7 +1,7 @@
 /**
  * @version   : 17.4.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2019 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -6453,7 +6453,7 @@ Bridge.define("System.ValueType", {
                     this.ExitCode = 0;
                 },
                 ctor: function () {
-                    System.Environment.Variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                    System.Environment.Variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor();
                     System.Environment.PatchDictionary(System.Environment.Variables);
                 }
             },
@@ -6480,7 +6480,7 @@ Bridge.define("System.ValueType", {
                         throw new System.ArgumentNullException.$ctor1(name);
                     }
 
-                    $t = Bridge.getEnumerator(System.Environment.Variables);
+                    $t = Bridge.getEnumerator(System.Environment.Variables, "getEnumerator");
                     try {
                         while ($t.moveNext()) {
                             var pair = $t.Current;
@@ -6548,7 +6548,7 @@ Bridge.define("System.ValueType", {
                     return System.Environment.GetEnvironmentVariable(variable);
                 },
                 GetEnvironmentVariables: function () {
-                    return System.Environment.PatchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String))(System.Environment.Variables));
+                    return System.Environment.PatchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor(System.Environment.Variables));
                 },
                 GetEnvironmentVariables$1: function (target) {
                     return System.Environment.GetEnvironmentVariables();
@@ -13775,6 +13775,565 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             }
         };
     });
+
+    // @source Enumerator.js
+
+    Bridge.define("System.Collections.Generic.Dictionary$2.Enumerator", function (TKey, TValue) { return {
+        inherits: [System.Collections.Generic.IEnumerator$1(System.Collections.Generic.KeyValuePair$2(TKey,TValue)),System.IDisposable,System.Collections.IEnumerator,System.Collections.IDictionaryEnumerator],
+        $kind: "nested struct",
+        statics: {
+            fields: {
+                DictEntry: 0,
+                KeyValuePair: 0
+            },
+            ctors: {
+                init: function () {
+                    this.DictEntry = 1;
+                    this.KeyValuePair = 2;
+                }
+            },
+            methods: {
+                getDefaultValue: function () { return new (System.Collections.Generic.Dictionary$2.Enumerator(TKey,TValue))(); }
+            }
+        },
+        fields: {
+            dictionary: null,
+            index: 0,
+            current: null,
+            getEnumeratorRetType: 0
+        },
+        props: {
+            Current: {
+                get: function () {
+                    return this.current;
+                }
+            },
+            System$Collections$IEnumerator$Current: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.dictionary.count + 1) | 0)) {
+                        throw new System.InvalidOperationException.$ctor1("ExceptionResource.InvalidOperation_EnumOpCantHappen");
+                    }
+                    if (this.getEnumeratorRetType === 1) {
+                        return new System.Collections.DictionaryEntry.$ctor1(this.current.key, this.current.value).$clone();
+                    }
+                    return new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).$ctor1(this.current.key, this.current.value);
+                }
+            },
+            System$Collections$IDictionaryEnumerator$Entry: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.dictionary.count + 1) | 0)) {
+                        throw new System.InvalidOperationException.$ctor1("ExceptionResource.InvalidOperation_EnumOpCantHappen");
+                    }
+                    return new System.Collections.DictionaryEntry.$ctor1(this.current.key, this.current.value);
+                }
+            },
+            System$Collections$IDictionaryEnumerator$Key: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.dictionary.count + 1) | 0)) {
+                        throw new System.InvalidOperationException.$ctor1("ExceptionResource.InvalidOperation_EnumOpCantHappen");
+                    }
+                    return this.current.key;
+                }
+            },
+            System$Collections$IDictionaryEnumerator$Value: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.dictionary.count + 1) | 0)) {
+                        throw new System.InvalidOperationException.$ctor1("ExceptionResource.InvalidOperation_EnumOpCantHappen");
+                    }
+                    return this.current.value;
+                }
+            }
+        },
+        alias: [
+            "Current", ["System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
+            "moveNext", "System$Collections$IEnumerator$moveNext",
+            "dispose", "System$IDisposable$Dispose"
+        ],
+        ctors: {
+            init: function () {
+                this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue))();
+            },
+            $ctor1: function (dictionary, getEnumeratorRetType) {
+                this.$initialize();
+                this.dictionary = dictionary;
+                this.index = 0;
+                this.getEnumeratorRetType = getEnumeratorRetType;
+                this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).ctor();
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            moveNext: function () {
+                for (; (this.index >>> 0) < ((this.dictionary.count) >>> 0); this.index = (this.index + 1) | 0) {
+                    if (this.dictionary.entries[this.index].hashCode >= 0) {
+                        this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).$ctor1(this.dictionary.entries[this.index].key, this.dictionary.entries[this.index].value);
+                        this.index = (this.index + 1) | 0;
+                        return true;
+                    }
+                }
+                this.index = (this.dictionary.count + 1) | 0;
+                this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).ctor();
+                return false;
+            },
+            dispose: function () { },
+            System$Collections$IEnumerator$reset: function () {
+                this.index = 0;
+                this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).ctor();
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([3788985113, this.dictionary, this.index, this.current, this.getEnumeratorRetType]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, System.Collections.Generic.Dictionary$2.Enumerator(TKey,TValue))) {
+                    return false;
+                }
+                return Bridge.equals(this.dictionary, o.dictionary) && Bridge.equals(this.index, o.index) && Bridge.equals(this.current, o.current) && Bridge.equals(this.getEnumeratorRetType, o.getEnumeratorRetType);
+            },
+            $clone: function (to) {
+                var s = to || new (System.Collections.Generic.Dictionary$2.Enumerator(TKey,TValue))();
+                s.dictionary = this.dictionary;
+                s.index = this.index;
+                s.current = this.current;
+                s.getEnumeratorRetType = this.getEnumeratorRetType;
+                return s;
+            }
+        }
+    }; });
+
+    // @source KeyCollection.js
+
+    Bridge.define("System.Collections.Generic.Dictionary$2.KeyCollection", function (TKey, TValue) { return {
+        inherits: [System.Collections.Generic.ICollection$1(TKey),System.Collections.Generic.IEnumerable$1(TKey),System.Collections.IEnumerable,System.Collections.ICollection,System.Collections.Generic.IReadOnlyCollection$1(TKey),System.Object],
+        $kind: "nested class",
+        fields: {
+            dictionary: null
+        },
+        props: {
+            Count: {
+                get: function () {
+                    return this.dictionary.count;
+                }
+            },
+            IsReadOnly: {
+                get: function () {
+                    return true;
+                }
+            },
+            IsSynchronized: {
+                get: function () {
+                    return true;
+                }
+            },
+            SyncRoot: {
+                get: function () {
+                    return null;
+                }
+            }
+        },
+        alias: [
+            "Count", ["System$Collections$Generic$IReadOnlyCollection$1$" + Bridge.getTypeAlias(TKey) + "$Count", "System$Collections$Generic$IReadOnlyCollection$1$Count"],
+            "Count", "System$Collections$ICollection$Count",
+            "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$IsReadOnly",
+            "IsSynchronized", "System$Collections$ICollection$IsSynchronized",
+            "SyncRoot", "System$Collections$ICollection$SyncRoot",
+            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$copyTo",
+            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$clear",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$contains",
+            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TKey) + "$remove",
+            "copyTo$1", "System$Collections$ICollection$copyTo",
+            "System$Collections$Generic$IEnumerable$1$GetEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(TKey) + "$GetEnumerator"
+        ],
+        ctors: {
+            ctor: function (dictionary) {
+                this.$initialize();
+                this.dictionary = dictionary;
+            }
+        },
+        methods: {
+            add: function (key) {
+                throw new System.NotSupportedException.ctor();
+            },
+            copyTo: function (array, index) {
+                var $t;
+                if (array == null) {
+                    throw new System.ArgumentNullException.$ctor1("array");
+                }
+
+                if (index < 0 || index > array.length) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                if (((array.length - index) | 0) < this.dictionary.count) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                var i = 0;
+
+                $t = Bridge.getEnumerator(this.dictionary, "getEnumerator");
+                try {
+                    while ($t.moveNext()) {
+                        var pair = $t.Current;
+                        array[System.Array.index(i, array)] = pair.key;
+                        i = (i + 1) | 0;
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$Dispose();
+                    }
+                }
+            },
+            copyTo$1: function (array, index) {
+                if (array == null) {
+                    throw new System.ArgumentNullException.$ctor1("array");
+                }
+
+                if (System.Array.getRank(array) !== 1) {
+                    throw new System.ArgumentException.$ctor1("Multi-dimensional arrays not supported.");
+                }
+
+                if (System.Array.getLower(array, 0) !== 0) {
+                    throw new System.ArgumentException.$ctor1("Non-zero lower bound arrays not supported.");
+                }
+
+                if (index < 0 || index > array.length) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                if (((array.length - index) | 0) < this.dictionary.count) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                var array1 = Bridge.as(array, System.Array.type(TKey));
+
+                if (array1 != null) {
+                    this.copyTo(array1, index);
+                }
+            },
+            clear: function () {
+                throw new System.NotSupportedException.ctor();
+            },
+            contains: function (key) {
+                return this.dictionary.containsKey(key);
+            },
+            remove: function (key) {
+                throw new System.NotSupportedException.ctor();
+            },
+            getEnumerator: function () {
+                return new (System.Collections.Generic.Dictionary$2.KeyCollection.Enumerator(TKey,TValue)).$ctor1(this.dictionary);
+            },
+            System$Collections$IEnumerable$GetEnumerator: function () {
+                return Bridge.cast(this.getEnumerator().$clone(), System.Collections.IEnumerator);
+            },
+            System$Collections$Generic$IEnumerable$1$GetEnumerator: function () {
+                return this.getEnumerator().$clone();
+            }
+        }
+    }; });
+
+    // @source Enumerator.js
+
+    Bridge.define("System.Collections.Generic.Dictionary$2.KeyCollection.Enumerator", function (TKey, TValue) { return {
+        inherits: [System.Collections.Generic.IEnumerator$1(TKey),System.IDisposable,System.Collections.IEnumerator],
+        $kind: "nested struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new (System.Collections.Generic.Dictionary$2.KeyCollection.Enumerator(TKey,TValue))(); }
+            }
+        },
+        fields: {
+            dictionary: null,
+            index: 0,
+            currentKey: Bridge.getDefaultValue(TKey)
+        },
+        props: {
+            Current: {
+                get: function () {
+                    return this.currentKey;
+                }
+            },
+            System$Collections$IEnumerator$Current: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.dictionary.count + 1) | 0)) {
+                        throw new System.InvalidOperationException.$ctor1("ExceptionResource.InvalidOperation_EnumOpCantHappen");
+                    }
+                    return this.currentKey;
+                }
+            }
+        },
+        alias: [
+            "Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(TKey) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
+            "dispose", "System$IDisposable$Dispose",
+            "moveNext", "System$Collections$IEnumerator$moveNext"
+        ],
+        ctors: {
+            $ctor1: function (dictionary) {
+                this.$initialize();
+                this.dictionary = dictionary;
+                this.index = 0;
+                this.currentKey = Bridge.getDefaultValue(TKey);
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            dispose: function () { },
+            moveNext: function () {
+                for (; (this.index >>> 0) < ((this.dictionary.count) >>> 0); this.index = (this.index + 1) | 0) {
+                    if (this.dictionary.entries[this.index].hashCode >= 0) {
+                        this.currentKey = this.dictionary.entries[this.index].key;
+                        this.index = (this.index + 1) | 0;
+                        return true;
+                    }
+                }
+                this.index = (this.dictionary.count + 1) | 0;
+                this.currentKey = Bridge.getDefaultValue(TKey);
+                return false;
+            },
+            System$Collections$IEnumerator$reset: function () {
+                this.index = 0;
+                this.currentKey = Bridge.getDefaultValue(TKey);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([3788985113, this.dictionary, this.index, this.currentKey]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, System.Collections.Generic.Dictionary$2.KeyCollection.Enumerator(TKey,TValue))) {
+                    return false;
+                }
+                return Bridge.equals(this.dictionary, o.dictionary) && Bridge.equals(this.index, o.index) && Bridge.equals(this.currentKey, o.currentKey);
+            },
+            $clone: function (to) {
+                var s = to || new (System.Collections.Generic.Dictionary$2.KeyCollection.Enumerator(TKey,TValue))();
+                s.dictionary = this.dictionary;
+                s.index = this.index;
+                s.currentKey = this.currentKey;
+                return s;
+            }
+        }
+    }; });
+
+    // @source ValueCollection.js
+
+    Bridge.define("System.Collections.Generic.Dictionary$2.ValueCollection", function (TKey, TValue) { return {
+        inherits: [System.Collections.Generic.ICollection$1(TValue),System.Collections.Generic.IEnumerable$1(TValue),System.Collections.IEnumerable,System.Collections.ICollection,System.Collections.Generic.IReadOnlyCollection$1(TValue),System.Object],
+        $kind: "nested class",
+        fields: {
+            dictionary: null
+        },
+        props: {
+            Count: {
+                get: function () {
+                    return this.dictionary.count;
+                }
+            },
+            IsReadOnly: {
+                get: function () {
+                    return true;
+                }
+            },
+            IsSynchronized: {
+                get: function () {
+                    return false;
+                }
+            },
+            SyncRoot: {
+                get: function () {
+                    return this;
+                }
+            }
+        },
+        alias: [
+            "Count", ["System$Collections$Generic$IReadOnlyCollection$1$" + Bridge.getTypeAlias(TValue) + "$Count", "System$Collections$Generic$IReadOnlyCollection$1$Count"],
+            "Count", "System$Collections$ICollection$Count",
+            "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$IsReadOnly",
+            "IsSynchronized", "System$Collections$ICollection$IsSynchronized",
+            "SyncRoot", "System$Collections$ICollection$SyncRoot",
+            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$copyTo",
+            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$clear",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$contains",
+            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(TValue) + "$remove",
+            "System$Collections$Generic$IEnumerable$1$GetEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(TValue) + "$GetEnumerator",
+            "copyTo$1", "System$Collections$ICollection$copyTo"
+        ],
+        ctors: {
+            ctor: function (dictionary) {
+                this.$initialize();
+                this.dictionary = dictionary;
+            }
+        },
+        methods: {
+            add: function (key) {
+                throw new System.NotSupportedException.ctor();
+            },
+            copyTo: function (array, index) {
+                var $t;
+                if (array == null) {
+                    throw new System.ArgumentNullException.$ctor1("array");
+                }
+
+                if (index < 0 || index > array.length) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                if (((array.length - index) | 0) < this.dictionary.count) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                var i = 0;
+
+                $t = Bridge.getEnumerator(this.dictionary, "getEnumerator");
+                try {
+                    while ($t.moveNext()) {
+                        var pair = $t.Current;
+                        array[System.Array.index(i, array)] = pair.value;
+                        i = (i + 1) | 0;
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$Dispose();
+                    }
+                }
+            },
+            copyTo$1: function (array, index) {
+                if (array == null) {
+                    throw new System.ArgumentNullException.$ctor1("array");
+                }
+
+                if (System.Array.getRank(array) !== 1) {
+                    throw new System.ArgumentException.$ctor1("Multi-dimensional arrays not supported.");
+                }
+
+                if (System.Array.getLower(array, 0) !== 0) {
+                    throw new System.ArgumentException.$ctor1("Non-zero lower bound arrays not supported.");
+                }
+
+                if (index < 0 || index > array.length) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                if (((array.length - index) | 0) < this.dictionary.count) {
+                    throw new System.ArgumentOutOfRangeException.$ctor1("index");
+                }
+
+                var array1 = Bridge.as(array, System.Array.type(TValue));
+
+                if (array1 != null) {
+                    this.copyTo(array1, index);
+                }
+            },
+            clear: function () {
+                throw new System.NotSupportedException.ctor();
+            },
+            contains: function (key) {
+                return this.dictionary.containsValue(key);
+            },
+            remove: function (key) {
+                throw new System.NotSupportedException.ctor();
+            },
+            getEnumerator: function () {
+                return new (System.Collections.Generic.Dictionary$2.ValueCollection.Enumerator(TKey,TValue)).$ctor1(this.dictionary);
+            },
+            System$Collections$Generic$IEnumerable$1$GetEnumerator: function () {
+                return this.getEnumerator().$clone();
+            },
+            System$Collections$IEnumerable$GetEnumerator: function () {
+                return Bridge.cast(this.getEnumerator().$clone(), System.Collections.IEnumerator);
+            }
+        }
+    }; });
+
+    // @source Enumerator.js
+
+    Bridge.define("System.Collections.Generic.Dictionary$2.ValueCollection.Enumerator", function (TKey, TValue) { return {
+        inherits: [System.Collections.Generic.IEnumerator$1(TValue),System.IDisposable,System.Collections.IEnumerator],
+        $kind: "nested struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new (System.Collections.Generic.Dictionary$2.ValueCollection.Enumerator(TKey,TValue))(); }
+            }
+        },
+        fields: {
+            dictionary: null,
+            index: 0,
+            currentValue: Bridge.getDefaultValue(TValue)
+        },
+        props: {
+            Current: {
+                get: function () {
+                    return this.currentValue;
+                }
+            },
+            System$Collections$IEnumerator$Current: {
+                get: function () {
+                    if (this.index === 0 || this.index === ((this.dictionary.count + 1) | 0)) {
+                        throw new System.InvalidOperationException.$ctor1("ExceptionResource.InvalidOperation_EnumOpCantHappen");
+                    }
+                    return this.currentValue;
+                }
+            }
+        },
+        alias: [
+            "Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(TValue) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
+            "dispose", "System$IDisposable$Dispose",
+            "moveNext", "System$Collections$IEnumerator$moveNext"
+        ],
+        ctors: {
+            $ctor1: function (dictionary) {
+                this.$initialize();
+                this.dictionary = dictionary;
+                this.index = 0;
+                this.currentValue = Bridge.getDefaultValue(TValue);
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            dispose: function () { },
+            moveNext: function () {
+                for (; (this.index >>> 0) < ((this.dictionary.count) >>> 0); this.index = (this.index + 1) | 0) {
+                    if (this.dictionary.entries[this.index].hashCode >= 0) {
+                        this.currentValue = this.dictionary.entries[this.index].value;
+                        this.index = (this.index + 1) | 0;
+                        return true;
+                    }
+                }
+                this.index = (this.dictionary.count + 1) | 0;
+                this.currentValue = Bridge.getDefaultValue(TValue);
+                return false;
+            },
+            System$Collections$IEnumerator$reset: function () {
+                this.index = 0;
+                this.currentValue = Bridge.getDefaultValue(TValue);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([3788985113, this.dictionary, this.index, this.currentValue]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, System.Collections.Generic.Dictionary$2.ValueCollection.Enumerator(TKey,TValue))) {
+                    return false;
+                }
+                return Bridge.equals(this.dictionary, o.dictionary) && Bridge.equals(this.index, o.index) && Bridge.equals(this.currentValue, o.currentValue);
+            },
+            $clone: function (to) {
+                var s = to || new (System.Collections.Generic.Dictionary$2.ValueCollection.Enumerator(TKey,TValue))();
+                s.dictionary = this.dictionary;
+                s.index = this.index;
+                s.currentValue = this.currentValue;
+                return s;
+            }
+        }
+    }; });
 
     // @source List.js
 
@@ -35462,7 +36021,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 KnownWords: {
                     get: function () {
                         if (System.Globalization.DateTimeFormatInfoScanner.s_knownWords == null) {
-                            var temp = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                            var temp = new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor();
 
                             temp.add("/", "");
                             temp.add("-", "");

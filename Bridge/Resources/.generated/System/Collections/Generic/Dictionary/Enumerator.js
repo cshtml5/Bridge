@@ -67,7 +67,7 @@
         alias: [
             "Current", ["System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
             "moveNext", "System$Collections$IEnumerator$moveNext",
-            "Dispose", "System$IDisposable$Dispose"
+            "dispose", "System$IDisposable$Dispose"
         ],
         ctors: {
             init: function () {
@@ -97,7 +97,7 @@
                 this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).ctor();
                 return false;
             },
-            Dispose: function () { },
+            dispose: function () { },
             System$Collections$IEnumerator$reset: function () {
                 this.index = 0;
                 this.current = new (System.Collections.Generic.KeyValuePair$2(TKey,TValue)).ctor();

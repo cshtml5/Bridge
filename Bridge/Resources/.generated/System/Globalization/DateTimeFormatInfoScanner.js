@@ -22,7 +22,7 @@
                 KnownWords: {
                     get: function () {
                         if (System.Globalization.DateTimeFormatInfoScanner.s_knownWords == null) {
-                            var temp = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                            var temp = new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor();
 
                             temp.add("/", "");
                             temp.add("-", "");

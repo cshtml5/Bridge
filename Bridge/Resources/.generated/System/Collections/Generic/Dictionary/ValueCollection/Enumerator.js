@@ -28,7 +28,7 @@
         },
         alias: [
             "Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(TValue) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
-            "Dispose", "System$IDisposable$Dispose",
+            "dispose", "System$IDisposable$Dispose",
             "moveNext", "System$Collections$IEnumerator$moveNext"
         ],
         ctors: {
@@ -43,7 +43,7 @@
             }
         },
         methods: {
-            Dispose: function () { },
+            dispose: function () { },
             moveNext: function () {
                 for (; (this.index >>> 0) < ((this.dictionary.count) >>> 0); this.index = (this.index + 1) | 0) {
                     if (this.dictionary.entries[this.index].hashCode >= 0) {

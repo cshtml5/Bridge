@@ -67,7 +67,7 @@
 
                 var i = 0;
 
-                $t = Bridge.getEnumerator(this.dictionary);
+                $t = Bridge.getEnumerator(this.dictionary, "getEnumerator");
                 try {
                     while ($t.moveNext()) {
                         var pair = $t.Current;
@@ -111,19 +111,19 @@
                 throw new System.NotSupportedException.ctor();
             },
             contains: function (key) {
-                return this.dictionary.ContainsValue(key);
+                return this.dictionary.containsValue(key);
             },
             remove: function (key) {
                 throw new System.NotSupportedException.ctor();
             },
-            GetEnumerator: function () {
+            getEnumerator: function () {
                 return new (System.Collections.Generic.Dictionary$2.ValueCollection.Enumerator(TKey,TValue)).$ctor1(this.dictionary);
             },
             System$Collections$Generic$IEnumerable$1$GetEnumerator: function () {
-                return this.GetEnumerator().$clone();
+                return this.getEnumerator().$clone();
             },
             System$Collections$IEnumerable$GetEnumerator: function () {
-                return Bridge.cast(this.GetEnumerator().$clone(), System.Collections.IEnumerator);
+                return Bridge.cast(this.getEnumerator().$clone(), System.Collections.IEnumerator);
             }
         }
     }; });
