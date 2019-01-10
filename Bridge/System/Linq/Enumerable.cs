@@ -843,7 +843,7 @@ namespace System.Linq
         /// An element in the sequence cannot be cast to type TResult.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).select(function (x) { return Bridge.cast(x, {TResult}); })")]
-        public static extern EnumerableInstance<TResult> Cast<TResult>(this IEnumerable source);
+        public static extern IEnumerable<TResult> Cast<TResult>(this IEnumerable source);
 
         /// <summary>
         /// Concatenates two sequences.
@@ -866,7 +866,7 @@ namespace System.Linq
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
         [Bridge.Template("System.Linq.Enumerable.from({first}).concat({second})")]
-        public static extern EnumerableInstance<TSource> Concat<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second);
+        public static extern IEnumerable<TSource> Concat<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second);
 
         /// <summary>
         /// Determines whether a sequence contains a specified element by using the default
@@ -983,7 +983,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).defaultIfEmpty({TSource:default})")]
-        public static extern EnumerableInstance<TSource> DefaultIfEmpty<TSource>(this IEnumerable<TSource> source);
+        public static extern IEnumerable<TSource> DefaultIfEmpty<TSource>(this IEnumerable<TSource> source);
 
         /// <summary>
         /// Returns the elements of the specified sequence or the specified value in
@@ -1003,7 +1003,7 @@ namespace System.Linq
         /// source is empty; otherwise, source.
         /// </returns>
         [Bridge.Template("System.Linq.Enumerable.from({source}).defaultIfEmpty({defaultValue})")]
-        public static extern EnumerableInstance<TSource> DefaultIfEmpty<TSource>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TSource> DefaultIfEmpty<TSource>(this IEnumerable<TSource> source,
             TSource defaultValue);
 
         /// <summary>
@@ -1024,7 +1024,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).distinct()")]
-        public static extern EnumerableInstance<TSource> Distinct<TSource>(this IEnumerable<TSource> source);
+        public static extern IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source);
 
         /// <summary>
         /// Returns distinct elements from a sequence by using a specified System.Collections.Generic.IEqualityComparer&lt;T&gt;
@@ -1047,7 +1047,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).distinct({comparer})")]
-        public static extern EnumerableInstance<TSource> Distinct<TSource>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer);
 
         /// <summary>
@@ -1109,7 +1109,7 @@ namespace System.Linq
         /// An empty System.Collections.Generic.IEnumerable&lt;T&gt; whose type argument is
         /// TResult.
         /// </returns>
-        public static extern EnumerableInstance<TResult> Empty<TResult>();
+        public static extern IEnumerable<TResult> Empty<TResult>();
 
         /// <summary>
         /// Produces the set difference of two sequences by using the default equality
@@ -1135,7 +1135,7 @@ namespace System.Linq
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
         [Bridge.Template("System.Linq.Enumerable.from({first}).except({second})")]
-        public static extern EnumerableInstance<TSource> Except<TSource>(this IEnumerable<TSource> first,
+        public static extern IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> first,
             IEnumerable<TSource> second);
 
         /// <summary>
@@ -1165,7 +1165,7 @@ namespace System.Linq
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
         [Bridge.Template("System.Linq.Enumerable.from({first}).except({second}, {comparer})")]
-        public static extern EnumerableInstance<TSource> Except<TSource>(this IEnumerable<TSource> first,
+        public static extern IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> first,
             IEnumerable<TSource> second, IEqualityComparer<TSource> comparer);
 
         /// <summary>
@@ -1284,7 +1284,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector})")]
-        public static extern EnumerableInstance<Grouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<Grouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector);
 
         /// <summary>
@@ -1314,7 +1314,7 @@ namespace System.Linq
         /// projection over a group and its key.
         /// </returns>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, null, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> GroupBy<TSource, TKey, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> GroupBy<TSource, TKey, TResult>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector, Func<TKey, IEnumerable<TSource>, TResult> resultSelector);
 
         /// <summary>
@@ -1348,7 +1348,7 @@ namespace System.Linq
         /// source or keySelector or elementSelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, {elementSelector})")]
-        public static extern EnumerableInstance<Grouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
+        public static extern IEnumerable<Grouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
             this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector);
 
         /// <summary>
@@ -1379,7 +1379,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, null, null, {comparer})")]
-        public static extern EnumerableInstance<Grouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<Grouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer);
 
         /// <summary>
@@ -1413,7 +1413,7 @@ namespace System.Linq
         /// projection over a group and its key.
         /// </returns>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, null, {resultSelector}, {comparer})")]
-        public static extern EnumerableInstance<TResult> GroupBy<TSource, TKey, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> GroupBy<TSource, TKey, TResult>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector, Func<TKey, IEnumerable<TSource>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer);
 
@@ -1451,7 +1451,7 @@ namespace System.Linq
         /// projection over a group and its key.
         /// </returns>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, {elementSelector}, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> GroupBy<TSource, TKey, TElement, TResult>(
+        public static extern IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
             this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector);
 
@@ -1490,7 +1490,7 @@ namespace System.Linq
         /// source or keySelector or elementSelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, {elementSelector}, null, {comparer})")]
-        public static extern EnumerableInstance<Grouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
+        public static extern IEnumerable<Grouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
             this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey> comparer);
 
@@ -1532,7 +1532,7 @@ namespace System.Linq
         /// projection over a group and its key.
         /// </returns>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, {elementSelector}, {resultSelector}, {comparer})")]
-        public static extern EnumerableInstance<TResult> GroupBy<TSource, TKey, TElement, TResult>(
+        public static extern IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
             this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector,
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector, IEqualityComparer<TKey> comparer);
 
@@ -1577,7 +1577,7 @@ namespace System.Linq
         /// is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({outer}).groupJoin({inner}, {outerKeySelector}, {innerKeySelector}, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
+        public static extern IEnumerable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector);
 
@@ -1626,7 +1626,7 @@ namespace System.Linq
         /// is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({outer}).groupJoin({inner}, {outerKeySelector}, {innerKeySelector}, {resultSelector}, {comparer})")]
-        public static extern EnumerableInstance<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
+        public static extern IEnumerable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<TOuter, IEnumerable<TInner>, TResult> resultSelector, IEqualityComparer<TKey> comparer);
 
@@ -1653,7 +1653,7 @@ namespace System.Linq
         /// first or second is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({first}).intersect({second})")]
-        public static extern EnumerableInstance<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second);
+        public static extern IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second);
 
         /// <summary>
         /// Produces the set intersection of two sequences by using the specified System.Collections.Generic.IEqualityComparer&lt;T&gt;
@@ -1681,7 +1681,7 @@ namespace System.Linq
         /// first or second is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({first}).intersect({second}, {comparer})")]
-        public static extern EnumerableInstance<TSource> Intersect<TSource>(this IEnumerable<TSource> first,
+        public static extern IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first,
             IEnumerable<TSource> second, IEqualityComparer<TSource> comparer);
 
         /// <summary>
@@ -1724,7 +1724,7 @@ namespace System.Linq
         /// is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({this}).join({inner}, {outerKeySelector}, {innerKeySelector}, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> Join<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
+        public static extern IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector);
 
@@ -1771,7 +1771,7 @@ namespace System.Linq
         /// is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({this}).join({inner}, {outerKeySelector}, {innerKeySelector}, {resultSelector}, {comparer})")]
-        public static extern EnumerableInstance<TResult> Join<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
+        public static extern IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey> comparer);
 
@@ -3374,7 +3374,7 @@ namespace System.Linq
         /// <exception cref="System.ArgumentOutOfRangeException">
         /// count is less than 0.-or-start + count -1 is larger than System.Int32.MaxValue.
         /// </exception>
-        public static extern EnumerableInstance<int> Range(int start, int count);
+        public static extern IEnumerable<int> Range(int start, int count);
 
         /// <summary>
         /// Generates a sequence that contains one repeated value.
@@ -3394,7 +3394,7 @@ namespace System.Linq
         /// <exception cref="System.ArgumentOutOfRangeException">
         /// count is less than 0.
         /// </exception>
-        public static extern EnumerableInstance<TResult> Repeat<TResult>(TResult element, int count);
+        public static extern IEnumerable<TResult> Repeat<TResult>(TResult element, int count);
 
         /// <summary>
         /// Inverts the order of the elements in a sequence.
@@ -3413,7 +3413,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).reverse()")]
-        public static extern EnumerableInstance<TSource> Reverse<TSource>(this IEnumerable<TSource> source);
+        public static extern IEnumerable<TSource> Reverse<TSource>(this IEnumerable<TSource> source);
 
         /// <summary>
         /// Projects each element of a sequence into a new form by incorporating the
@@ -3440,7 +3440,7 @@ namespace System.Linq
         /// source or selector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).select({selector})")]
-        public static extern EnumerableInstance<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source,
             Func<TSource, int, TResult> selector);
 
         /// <summary>
@@ -3466,7 +3466,7 @@ namespace System.Linq
         /// source or selector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).select({selector})")]
-        public static extern EnumerableInstance<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source,
             Func<TSource, TResult> selector);
 
         /// <summary>
@@ -3494,7 +3494,7 @@ namespace System.Linq
         /// source or selector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).selectMany({selector})")]
-        public static extern EnumerableInstance<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TResult>> selector);
 
         /// <summary>
@@ -3524,7 +3524,7 @@ namespace System.Linq
         /// source or selector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).selectMany({selector})")]
-        public static extern EnumerableInstance<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TResult>> selector);
 
         /// <summary>
@@ -3560,7 +3560,7 @@ namespace System.Linq
         /// source or collectionSelector or resultSelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).selectMany({collectionSelector}, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> SelectMany<TSource, TCollection, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(this IEnumerable<TSource> source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
 
         /// <summary>
@@ -3598,7 +3598,7 @@ namespace System.Linq
         /// source or collectionSelector or resultSelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).selectMany({collectionSelector}, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> SelectMany<TSource, TCollection, TResult>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(this IEnumerable<TSource> source,
             Func<TSource, int, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
 
         /// <summary>
@@ -3772,7 +3772,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).skip({count})")]
-        public static extern EnumerableInstance<TSource> Skip<TSource>(this IEnumerable<TSource> source, int count);
+        public static extern IEnumerable<TSource> Skip<TSource>(this IEnumerable<TSource> source, int count);
 
         /// <summary>
         /// Bypasses elements in a sequence as long as a specified condition is true
@@ -3796,7 +3796,7 @@ namespace System.Linq
         /// source or predicate is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).skipWhile({predicate})")]
-        public static extern EnumerableInstance<TSource> SkipWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate);
+        public static extern IEnumerable<TSource> SkipWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate);
 
         /// <summary>
         /// Bypasses elements in a sequence as long as a specified condition is true
@@ -3822,7 +3822,7 @@ namespace System.Linq
         /// source or predicate is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).skipWhile({predicate})")]
-        public static extern EnumerableInstance<TSource> SkipWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate);
+        public static extern IEnumerable<TSource> SkipWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate);
 
         /// <summary>
         /// Computes the sum of a sequence of nullable System.Decimal values.
@@ -4433,7 +4433,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).take({count})")]
-        public static extern EnumerableInstance<TSource> Take<TSource>(this IEnumerable<TSource> source, int count);
+        public static extern IEnumerable<TSource> Take<TSource>(this IEnumerable<TSource> source, int count);
 
         /// <summary>
         /// Returns elements from a sequence as long as a specified condition is true.
@@ -4456,7 +4456,7 @@ namespace System.Linq
         /// source or predicate is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).takeWhile({predicate})")]
-        public static extern EnumerableInstance<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate);
+        public static extern IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate);
 
         /// <summary>
         /// Returns elements from a sequence as long as a specified condition is true.
@@ -4481,7 +4481,7 @@ namespace System.Linq
         /// source or predicate is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).takeWhile({predicate})")]
-        public static extern EnumerableInstance<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate);
+        public static extern IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate);
 
         /// <summary>
         /// Performs a subsequent ordering of the elements in a sequence in ascending
@@ -4931,7 +4931,7 @@ namespace System.Linq
         /// first or second is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({first}).union({second})")]
-        public static extern EnumerableInstance<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second);
+        public static extern IEnumerable<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second);
 
         /// <summary>
         /// Produces the set union of two sequences by using a specified System.Collections.Generic.IEqualityComparer&lt;T&gt;.
@@ -4958,7 +4958,7 @@ namespace System.Linq
         /// first or second is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({first}).union({second}, {comparer})")]
-        public static extern EnumerableInstance<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second,
+        public static extern IEnumerable<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer);
 
         /// <summary>
@@ -4981,7 +4981,7 @@ namespace System.Linq
         /// source or predicate is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).where({predicate})")]
-        public static extern EnumerableInstance<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate);
+        public static extern IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate);
 
         /// <summary>
         /// Filters a sequence of values based on a predicate. Each element's index is
@@ -5005,7 +5005,7 @@ namespace System.Linq
         /// source or predicate is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).where({predicate})")]
-        public static extern EnumerableInstance<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate);
+        public static extern IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate);
 
         /// <summary>
         /// Merges two sequences by using the specified predicate function.
@@ -5036,7 +5036,7 @@ namespace System.Linq
         /// first or second is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({first}).zip({second}, {resultSelector})")]
-        public static extern EnumerableInstance<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second,
+        public static extern IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector);
     }
 }
