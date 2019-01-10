@@ -275,8 +275,6 @@ namespace System
 
         public static extern double Pow(double x, double y);
 
-        public static extern double Pow(int x, int y);
-
         public static extern double Acos(double x);
 
         public static extern double Asin(double x);
