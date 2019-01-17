@@ -3270,7 +3270,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).orderBy({keySelector})")]
-        public static extern OrderedEnumerable<TSource> OrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector);
+        public static extern IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector);
 
         /// <summary>
         /// Sorts the elements of a sequence in ascending order by using a specified
@@ -3299,7 +3299,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).orderBy({keySelector}, {comparer})")]
-        public static extern OrderedEnumerable<TSource> OrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector,
+        public static extern IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer);
 
         /// <summary>
@@ -3325,7 +3325,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).orderByDescending({keySelector})")]
-        public static extern OrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(this IEnumerable<TSource> source,
+        public static extern IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector);
 
         /// <summary>
@@ -3355,7 +3355,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).orderByDescending({keySelector}, {comparer})")]
-        public static extern OrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(this IEnumerable<TSource> source,
+        public static extern IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector, IComparer<TKey> comparer);
 
         /// <summary>
