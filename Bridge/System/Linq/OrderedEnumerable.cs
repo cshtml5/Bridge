@@ -6,7 +6,7 @@ namespace System.Linq
     [Bridge.External]
     [Bridge.IgnoreGeneric]
     [Bridge.Convention(Target = Bridge.ConventionTarget.Member, Member = Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
-    public interface IOrderedEnumerable<TSource> : IEnumerable<TSource>
+    public interface IOrderedEnumerable<TSource> : IEnumerable<TSource>, System.Collections.IEnumerable
     {
         [Bridge.Template("thenBy({keySelector})")]
         IOrderedEnumerable<TSource> ThenBy<TKey>(Func<TSource, TKey> keySelector);
