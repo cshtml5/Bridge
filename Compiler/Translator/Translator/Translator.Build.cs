@@ -13,6 +13,7 @@ using ICSharpCode.NRefactory.Documentation;
 using System.Text;
 using System.Globalization;
 using Mono.Cecil;
+using Mono.Cecil.Pdb;
 
 namespace Bridge.Translator
 {
@@ -273,7 +274,9 @@ namespace Bridge.Translator
             var asm = Mono.Cecil.AssemblyDefinition.ReadAssembly(refPath, new ReaderParameters()
             {
                 ReadingMode = ReadingMode.Deferred,
-                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation),
+                SymbolReaderProvider = new PdbReaderProvider(),
+                ReadSymbols = true
             });
 
             foreach (AssemblyNameReference r in asm.MainModule.AssemblyReferences)
