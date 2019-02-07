@@ -271,13 +271,21 @@ namespace Bridge.Translator
 
         private void AddNestedReferences(IList<string> referencesPathes, string refPath)
         {
-            var asm = Mono.Cecil.AssemblyDefinition.ReadAssembly(refPath, new ReaderParameters()
+            var readerParameters = new ReaderParameters()
             {
                 ReadingMode = ReadingMode.Deferred,
-                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation),
-                SymbolReaderProvider = new PdbReaderProvider(),
-                ReadSymbols = true
-            });
+                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+            };
+
+            string pdbPath = Path.ChangeExtension(refPath, "pdb");
+            bool readSymbols = File.Exists(pdbPath);
+            if (readSymbols)
+            {
+                readerParameters.SymbolReaderProvider = new PdbReaderProvider();
+                readerParameters.ReadSymbols = true;
+            }
+
+            var asm = Mono.Cecil.AssemblyDefinition.ReadAssembly(refPath, readerParameters);
 
             foreach (AssemblyNameReference r in asm.MainModule.AssemblyReferences)
             {
