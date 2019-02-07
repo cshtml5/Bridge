@@ -3,6 +3,7 @@ using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.TypeSystem;
 using Mono.Cecil;
+using Mono.Cecil.Pdb;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -104,7 +105,9 @@ namespace Bridge.Translator
                     new ReaderParameters()
                     {
                         ReadingMode = ReadingMode.Deferred,
-                        AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+                        AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation),
+                        SymbolReaderProvider = new PdbReaderProvider(),
+                        ReadSymbols = true
                     }
                 );
 

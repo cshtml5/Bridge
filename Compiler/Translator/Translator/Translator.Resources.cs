@@ -475,7 +475,7 @@ namespace Bridge.Translator
             var assemblyLocation = this.AssemblyLocation;
 
             this.Log.Trace("Writing resources into " + assemblyLocation);
-            assemblyDef.Write(assemblyLocation);
+            assemblyDef.Write(assemblyLocation, new WriterParameters { WriteSymbols = true });
             this.Log.Trace("Wrote resources into " + assemblyLocation);
 
             this.Log.Trace("Done embedding resources");
