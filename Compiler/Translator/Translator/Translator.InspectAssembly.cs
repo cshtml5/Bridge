@@ -122,17 +122,24 @@ namespace Bridge.Translator
 
             CurrentAssemblyLocationInspected.Push(location);
 
+            var readerParameters = new ReaderParameters()
+            {
+                ReadingMode = ReadingMode.Deferred,
+                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+            };
+
+            string pdbLocation = Path.ChangeExtension(location, "pdb");
+            bool readSymbols = File.Exists(pdbLocation);
+            if (readSymbols)
+            {
+                readerParameters.SymbolReaderProvider = new PdbReaderProvider();
+                readerParameters.ReadSymbols = true;
+            }
+
             var assemblyDefinition = AssemblyDefinition.ReadAssembly(
                     location,
-                    new ReaderParameters()
-                    {
-                        ReadingMode = ReadingMode.Deferred,
-                        AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation),
-                        SymbolReaderProvider = new PdbReaderProvider(),
-                        ReadSymbols = true
-                    }
+                    readerParameters
                 );
-
 
             foreach (AssemblyNameReference r in assemblyDefinition.MainModule.AssemblyReferences)
             {
