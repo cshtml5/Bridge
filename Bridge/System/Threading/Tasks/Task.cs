@@ -1,5 +1,6 @@
 using Bridge;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace System.Threading.Tasks
 {
