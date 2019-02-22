@@ -275,7 +275,7 @@ namespace Bridge.Translator
                 type = resolveResult.Type;
             }
 
-            if ((type.FullName == "System.Threading.Tasks.TaskAwaiter" || type.FullName == "System.Threading.Tasks.Task") && type.TypeParameterCount > 0)
+            if ((type.FullName == "System.Runtime.CompilerServices.TaskAwaiter" || type.FullName == "System.Threading.Tasks.Task") && type.TypeParameterCount > 0)
             {
                 return true;
             }
@@ -293,7 +293,7 @@ namespace Bridge.Translator
                     {
                         type = awaiterMethod.Type;
 
-                        if ((type.FullName == "System.Threading.Tasks.TaskAwaiter" || type.FullName == "System.Threading.Tasks.Task") && type.TypeParameterCount > 0)
+                        if ((type.FullName == "System.Runtime.CompilerServices.TaskAwaiter" || type.FullName == "System.Threading.Tasks.Task") && type.TypeParameterCount > 0)
                         {
                             return true;
                         }

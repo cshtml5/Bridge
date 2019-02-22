@@ -1,6 +1,5 @@
-using System.Runtime.CompilerServices;
 
-namespace System.Threading.Tasks
+namespace System.Runtime.CompilerServices
 {
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Bridge.External]
