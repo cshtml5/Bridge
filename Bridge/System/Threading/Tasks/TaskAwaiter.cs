@@ -23,9 +23,9 @@ namespace System.Runtime.CompilerServices
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Bridge.External]
     [Bridge.Name("System.Threading.Tasks.Task")]
-    public class TaskAwaiter<TResult> : INotifyCompletion
+    public struct TaskAwaiter<TResult> : INotifyCompletion
     {
-        internal extern TaskAwaiter();
+        //internal extern TaskAwaiter();
 
         public extern bool IsCompleted
         {
