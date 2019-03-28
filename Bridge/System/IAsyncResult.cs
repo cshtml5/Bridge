@@ -11,5 +11,6 @@ namespace System
         object AsyncState { get; }
         bool CompletedSynchronously { get; }
         bool IsCompleted { get; }
+        WaitHandle AsyncWaitHandle { get; }
     }
 }

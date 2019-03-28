@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Diagnostics.Contracts;
 using System.Reflection;
+using System.Threading;
 
 namespace System.IO
 {
@@ -551,6 +552,14 @@ namespace System.IO
                 get
                 {
                     return true;
+                }
+            }
+
+            public WaitHandle AsyncWaitHandle
+            {
+                get
+                {
+                    throw new NotImplementedException();
                 }
             }
 
