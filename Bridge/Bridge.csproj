@@ -468,6 +468,7 @@
     <Compile Include="System\Text\UTF8Encoding.cs" />
     <Compile Include="System\Text\UnicodeEncoding.cs" />
     <Compile Include="System\Text\EncodingInfo.cs" />
+    <Compile Include="System\Threading\WaitHandle.cs" />
     <Compile Include="System\Type.cs" />
     <Compile Include="System\Text\RegularExpressions\Capture.cs" />
     <Compile Include="System\Text\RegularExpressions\CaptureCollection.cs" />
