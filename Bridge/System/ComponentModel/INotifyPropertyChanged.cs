@@ -13,20 +13,26 @@ namespace System.ComponentModel
     [Bridge.External]
     public class PropertyChangedEventArgs : Bridge.IBridgeClass
     {
+        private readonly string propertyName;
+
+        /// <summary>
+        /// Initializes a new instance of the System.ComponentModel.PropertyChangedEventArgs class.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
         public PropertyChangedEventArgs(string propertyName)
         {
+            this.propertyName = propertyName;
         }
 
-        public PropertyChangedEventArgs(string propertyName, object newValue)
+        /// <summary>
+        /// Gets the name of the property that changed. Returns the name of the property that changed.
+        /// </summary>
+        public virtual string PropertyName
         {
+            get
+            {
+                return propertyName;
+            }
         }
-
-        public PropertyChangedEventArgs(string propertyName, object newValue, object oldValue)
-        {
-        }
-
-        public readonly string PropertyName;
-        public readonly object OldValue;
-        public readonly object NewValue;
     }
 }
