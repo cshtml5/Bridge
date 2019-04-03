@@ -3245,7 +3245,7 @@ namespace System.Linq
         /// source is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).ofType({TResult})")]
-        public static extern EnumerableInstance<TResult> OfType<TResult>(this IEnumerable source);
+        public static extern IEnumerable<TResult> OfType<TResult>(this IEnumerable source);
 
         /// <summary>
         /// Sorts the elements of a sequence in ascending order according to a key.
