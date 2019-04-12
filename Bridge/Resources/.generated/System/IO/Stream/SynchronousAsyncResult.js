@@ -58,12 +58,18 @@
                 get: function () {
                     return true;
                 }
+            },
+            AsyncWaitHandle: {
+                get: function () {
+                    throw new System.NotImplementedException.ctor();
+                }
             }
         },
         alias: [
             "IsCompleted", "System$IAsyncResult$IsCompleted",
             "AsyncState", "System$IAsyncResult$AsyncState",
-            "CompletedSynchronously", "System$IAsyncResult$CompletedSynchronously"
+            "CompletedSynchronously", "System$IAsyncResult$CompletedSynchronously",
+            "AsyncWaitHandle", "System$IAsyncResult$AsyncWaitHandle"
         ],
         ctors: {
             $ctor1: function (bytesRead, asyncStateObject) {
