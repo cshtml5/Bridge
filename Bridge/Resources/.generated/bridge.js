@@ -1,7 +1,7 @@
 /**
  * @version   : 17.4.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2019 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -38855,12 +38855,18 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 get: function () {
                     return true;
                 }
+            },
+            AsyncWaitHandle: {
+                get: function () {
+                    throw new System.NotImplementedException.ctor();
+                }
             }
         },
         alias: [
             "IsCompleted", "System$IAsyncResult$IsCompleted",
             "AsyncState", "System$IAsyncResult$AsyncState",
-            "CompletedSynchronously", "System$IAsyncResult$CompletedSynchronously"
+            "CompletedSynchronously", "System$IAsyncResult$CompletedSynchronously",
+            "AsyncWaitHandle", "System$IAsyncResult$AsyncWaitHandle"
         ],
         ctors: {
             $ctor1: function (bytesRead, asyncStateObject) {
