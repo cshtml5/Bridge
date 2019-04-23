@@ -16,12 +16,6 @@ namespace System
         public const string ArgumentException_ValueTupleIncorrectType = "Argument must be of type {0}.";
         public const string ArgumentException_ValueTupleLastArgumentNotAValueTuple = "The last element of an eight element ValueTuple must be a ValueTuple.";
 
-        private static ResourceManager ResourceManager
-        {
-            get;
-            set;
-        }
-
         // This method is used to decide if we need to append the exception message parameters to the message when calling SR.Format. 
         // by default it returns false.
         [MethodImpl(MethodImplOptions.NoInlining)]
