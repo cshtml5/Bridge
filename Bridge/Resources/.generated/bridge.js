@@ -11376,7 +11376,9 @@ Bridge.define("System.ValueType", {
                 Launch: function () {
                     return true;
                 },
-                Log: function (level, category, message) { },
+                Log: function (level, category, message) {
+                    System.Console.Write(message);
+                },
                 NotifyOfCrossThreadDependency: function () { }
             }
         }
