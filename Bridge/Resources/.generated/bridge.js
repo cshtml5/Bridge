@@ -1,7 +1,7 @@
 /**
  * @version   : 17.4.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @copyright : Copyright 2008-2018 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2019 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -11341,7 +11341,9 @@ Bridge.define("System.ValueType", {
                 Launch: function () {
                     return true;
                 },
-                Log: function (level, category, message) { },
+                Log: function (level, category, message) {
+                    System.Console.Write(message);
+                },
                 NotifyOfCrossThreadDependency: function () { }
             }
         }
