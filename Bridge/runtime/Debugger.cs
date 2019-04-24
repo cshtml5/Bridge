@@ -10,7 +10,7 @@ namespace System.Diagnostics
         public static bool IsAttached { get { return true; } }
         public static bool IsLogging() { return true; }
         public static bool Launch() { return true; }
-        public static void Log(int level, string category, string message) { }
+        public static void Log(int level, string category, string message) { Console.Write(message); }
         public static void NotifyOfCrossThreadDependency() { }
     }
 }
