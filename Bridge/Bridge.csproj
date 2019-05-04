@@ -606,6 +606,7 @@
     <Content Include="Resources\.generated\System\Collections\ObjectModel\Collection.js" />
     <Content Include="Resources\.generated\System\Collections\ObjectModel\ReadOnlyCollection.js" />
     <Content Include="Resources\.generated\System\ComponentModel\BrowsableAttribute.js" />
+    <Content Include="Resources\.generated\System\ComponentModel\DataAnnotations\ValidationResult.js" />
     <Content Include="Resources\.generated\System\ComponentModel\DefaultValueAttribute.js" />
     <Content Include="Resources\.generated\System\Console.js" />
     <Content Include="Resources\.generated\System\DateTimeKind.js" />
