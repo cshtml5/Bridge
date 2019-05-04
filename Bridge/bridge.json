@@ -233,6 +233,8 @@
         "Resources/.generated/System/ComponentModel/BrowsableAttribute.js",
         "Resources/.generated/System/ComponentModel/DefaultValueAttribute.js",
 
+        "Resources/.generated/System/ComponentModel/DataAnnotations/ValidationResult.js",
+
         "Resources/.generated/System/Console.js",
         "Resources/.generated/System/TokenType.js",
         "Resources/.generated/System/UnitySerializationHolder.js",
