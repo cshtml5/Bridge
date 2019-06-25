@@ -25490,10 +25490,22 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
             ctor: function (uriString) {
                 this.$initialize();
                 this.absoluteUri = uriString;
+                this.originalString = uriString;
+            },
+
+            ctor: function (uriString, uriKind) {
+                this.$initialize();
+                this.absoluteUri = uriString;
+                this.originalString = uriString;
+                this.uriKind = uriKind;
             },
 
             getAbsoluteUri: function () {
                 return this.absoluteUri;
+            },
+
+            getOriginalString: function () {
+                return this.originalString;
             },
 
             toJSON: function () {
@@ -39816,6 +39828,19 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                 Thursday: 4,
                 Friday: 5,
                 Saturday: 6
+            }
+        }
+    });
+
+    // @source UriKind.js
+
+    Bridge.define("System.UriKind", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                RelativeOrAbsolute: 0,
+                Absolute: 1,
+                Relative: 2
             }
         }
     });
