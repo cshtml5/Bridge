@@ -50614,13 +50614,11 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             fields: {
-                ZERO_CHAR_VALUE: 0,
-                separatorsArray: 0
+                ZERO_CHAR_VALUE: 0
             },
             ctors: {
                 init: function () {
                     this.ZERO_CHAR_VALUE = 48;
-                    this.separatorsArray = 46;
                 }
             },
             methods: {
@@ -50662,7 +50660,7 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
                         return false;
                     }
 
-                    var parsedComponents = System.String.split(version, [System.Version.separatorsArray].map(function (i) {{ return String.fromCharCode(i); }}));
+                    var parsedComponents = System.String.split(version, [46].map(function (i) {{ return String.fromCharCode(i); }}));
                     var parsedComponentsLength = parsedComponents.length;
 
                     if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
