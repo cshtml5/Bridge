@@ -76,6 +76,9 @@ namespace Bridge.Translator
         }
 
         internal static Regex FormatArgRegex = new Regex(@"\{(\*?)(\w+)(\:(\w+))?\}");
+
+        internal static Regex FormatArgRegexDollarSigns = new Regex(@"\$(\*?)(\w+)(\:(\w+))?");
+
         private static Regex _inlineMethod = new Regex(@"([$\w\.\{\}\(\)]+)\(\s*(.*)\)");
 
         protected virtual IList<Expression> GetExpressionsByKey(IEnumerable<NamedParamExpression> expressions, string key)
@@ -161,7 +164,8 @@ namespace Bridge.Translator
             if (args.Length > 0)
             {
                 var emitter = block.Emitter;
-                inline = InlineArgumentsBlock.FormatArgRegex.Replace(inline, delegate (Match m)
+
+                MatchEvaluator replacer = delegate (Match m)
                 {
                     int count = emitter.Writers.Count;
                     string key = m.Groups[2].Value;
@@ -212,7 +216,10 @@ namespace Bridge.Translator
                     emitter.Output = oldSb;
 
                     return replacement;
-                });
+                };
+
+                inline = InlineArgumentsBlock.FormatArgRegex.Replace(inline, replacer);
+                inline = InlineArgumentsBlock.FormatArgRegexDollarSigns.Replace(inline, replacer);
             }
 
             return inline;
