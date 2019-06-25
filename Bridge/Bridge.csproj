@@ -554,6 +554,7 @@
     <Compile Include="System\TimeSpan.cs" />
     <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />
+    <Compile Include="System\UriKind.cs" />
     <Compile Include="System\ValueTuple.cs" />
     <Compile Include="System\Version.cs" />
   </ItemGroup>
@@ -745,6 +746,7 @@
     <Content Include="Resources\.generated\System\UnauthorizedAccessException.js" />
     <Content Include="Resources\.generated\System\UnhandledExceptionEventArgs.js" />
     <Content Include="Resources\.generated\System\UnitySerializationHolder.js" />
+    <Content Include="Resources\.generated\System\UriKind.js" />
     <Content Include="Resources\.generated\System\Version.js" />
     <Content Include="Resources\.generated\System\Version\ParseFailureKind.js" />
     <Content Include="Resources\.generated\System\Version\VersionResult.js" />

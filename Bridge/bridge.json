@@ -244,6 +244,8 @@
         "Resources/.generated/System/DateTimeResult.js",
         "Resources/.generated/System/DayOfWeek.js",
 
+        "Resources/.generated/System/UriKind.js",
+
         "Resources/.generated/System/DBNull.js",
         "Resources/.generated/System/Empty.js",
 
