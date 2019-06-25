@@ -3,6 +3,7 @@ using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.TypeSystem;
 using Mono.Cecil;
+using Mono.Cecil.Pdb;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -121,15 +122,24 @@ namespace Bridge.Translator
 
             CurrentAssemblyLocationInspected.Push(location);
 
+            var readerParameters = new ReaderParameters()
+            {
+                ReadingMode = ReadingMode.Deferred,
+                AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
+            };
+
+            string pdbLocation = Path.ChangeExtension(location, "pdb");
+            bool readSymbols = File.Exists(pdbLocation);
+            if (readSymbols)
+            {
+                readerParameters.SymbolReaderProvider = new PdbReaderProvider();
+                readerParameters.ReadSymbols = true;
+            }
+
             var assemblyDefinition = AssemblyDefinition.ReadAssembly(
                     location,
-                    new ReaderParameters()
-                    {
-                        ReadingMode = ReadingMode.Deferred,
-                        AssemblyResolver = new CecilAssemblyResolver(this.Log, this.AssemblyLocation)
-                    }
+                    readerParameters
                 );
-
 
             foreach (AssemblyNameReference r in assemblyDefinition.MainModule.AssemblyReferences)
             {
