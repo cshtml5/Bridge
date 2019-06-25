@@ -52,6 +52,11 @@ namespace System.Threading.Tasks
             get;
         }
 
+        WaitHandle IAsyncResult.AsyncWaitHandle
+        {
+            get;
+        }
+
         public extern Task ContinueWith(Action<Task> continuationAction);
 
         public extern Task<TResult> ContinueWith<TResult>(Func<Task, TResult> continuationFunction);
