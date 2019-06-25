@@ -270,12 +270,7 @@ namespace System
         [Bridge.Template("Bridge.Math.logWithBase({x}, 10.0)")]
         public static extern double Log10(double x);
 
-        [Bridge.Template("{x}.pow({y})")]
-        public static extern decimal Pow(decimal x, decimal y);
-
         public static extern double Pow(double x, double y);
-
-        public static extern double Pow(int x, int y);
 
         public static extern double Acos(double x);
 
