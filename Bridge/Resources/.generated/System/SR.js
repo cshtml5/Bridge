@@ -5,9 +5,6 @@
                 ArgumentException_ValueTupleLastArgumentNotAValueTuple: null,
                 _lock: null
             },
-            props: {
-                ResourceManager: null
-            },
             ctors: {
                 init: function () {
                     this.ArgumentException_ValueTupleIncorrectType = "Argument must be of type {0}.";

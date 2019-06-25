@@ -150,7 +150,6 @@
     <Compile Include="shared\System\Resources\MissingSatelliteAssemblyException.cs" />
     <Compile Include="shared\System\Resources\NeutralResourcesLanguageAttribute.cs" />
     <Compile Include="shared\System\Resources\ResourceFallbackManager.cs" />
-    <Compile Include="shared\System\Resources\ResourceManager.cs" />
     <Compile Include="shared\System\Resources\ResourceTypeCode.cs" />
     <Compile Include="shared\System\Resources\SatelliteContractVersionAttribute.cs" />
     <Compile Include="shared\System\Resources\UltimateResourceFallbackLocation.cs" />
