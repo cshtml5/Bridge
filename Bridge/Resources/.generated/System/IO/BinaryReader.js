@@ -65,7 +65,6 @@
                 this.m_isMemoryStream = (Bridge.referenceEquals(Bridge.getType(this.m_stream), System.IO.MemoryStream));
                 this.m_leaveOpen = leaveOpen;
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.m_encoding != null; }, "[BinaryReader.ctor]m_encoding!=null");
             }
         },
         methods: {
@@ -190,7 +189,6 @@
                         System.IO.__Error.FileNotOpen();
                     }
                     var mStream = Bridge.as(this.m_stream, System.IO.MemoryStream);
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return mStream != null; }, "m_stream as MemoryStream != null");
 
                     return mStream.InternalReadInt32();
                 } else {
@@ -301,7 +299,6 @@
                 return sb.toString();
             },
             InternalReadChars: function (buffer, index, count) {
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.m_stream != null; });
 
                 var charsRemaining = count;
 
@@ -332,7 +329,6 @@
                     index = (index + 1) | 0;
                 }
 
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return charsRemaining >= 0; }, "We read too many characters.");
 
                 return (((count - charsRemaining) | 0));
             },
@@ -442,7 +438,6 @@
                     }
 
                     if (!allowSurrogate) {
-                        System.Diagnostics.Contracts.Contract.assert(4, this, function () { return charsRead < 2; }, "InternalReadOneChar - assuming we only got 0 or 1 char, not 2!");
                     }
                 }
 

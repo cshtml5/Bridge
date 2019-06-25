@@ -346,7 +346,6 @@
                 return System.IO.TextReader.prototype.ReadBlock.call(this, buffer, index, count);
             },
             CompressBuffer: function (n) {
-                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.byteLen >= n; }, "CompressBuffer was called with a number of bytes greater than the current buffer length.  Are two threads using this StreamReader at the same time?");
                 System.Array.copy(this.byteBuffer, n, this.byteBuffer, 0, ((this.byteLen - n) | 0));
                 this.byteLen = (this.byteLen - n) | 0;
             },
@@ -397,9 +396,7 @@
 
                 this.byteLen = 0;
                 do {
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.bytePos === 0; }, "bytePos can be non zero only when we are trying to _checkPreamble.  Are two threads using this StreamReader at the same time?");
                     this.byteLen = this.stream.Read(this.byteBuffer, 0, this.byteBuffer.length);
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.byteLen >= 0; }, "Stream.Read returned a negative number!  This is a bug in your stream class.");
 
                     if (this.byteLen === 0) {
                         return this.charLen;
@@ -430,13 +427,10 @@
                 readToUserBuffer.v = desiredChars >= this._maxCharsPerBuffer;
 
                 do {
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return charsRead === 0; });
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.bytePos === 0; }, "bytePos can be non zero only when we are trying to _checkPreamble.  Are two threads using this StreamReader at the same time?");
 
                     this.byteLen = this.stream.Read(this.byteBuffer, 0, this.byteBuffer.length);
 
-                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.byteLen >= 0; }, "Stream.Read returned a negative number!  This is a bug in your stream class.");
 
                     if (this.byteLen === 0) {
                         break;

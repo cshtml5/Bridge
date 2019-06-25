@@ -42,7 +42,6 @@
                 },
                 InternalGetResourceString: function (key) {
                     if (key == null || key.length === 0) {
-                        System.Diagnostics.Debug.Fail("SR::GetResourceString with null or empty key.  Bug in caller, or weird recursive loading problem?");
                         return key;
                     }
 
