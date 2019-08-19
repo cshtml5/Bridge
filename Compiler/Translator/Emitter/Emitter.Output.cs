@@ -376,10 +376,12 @@ namespace Bridge.Translator
             var resources = this.Translator.AssemblyDefinition.MainModule.Resources.Where(r => r.ResourceType == ResourceType.Embedded && r.IsPublic && !r.Name.EndsWith(".dll")).Cast<EmbeddedResource>().ToArray();
             JObject obj = new JObject();
 
+#if ADD_EMBEDDED_RESOURCES // This is disabled in CSHTML5 because the resources are already copied to the Output directory, so we do not want to also embed them into the ".meta.js" files.
             foreach (var embeddedResource in resources)
             {
                 obj.Add(embeddedResource.Name, Convert.ToBase64String(Emitter.ReadResource(embeddedResource)));
             }
+#endif
 
             return obj.Count > 0 ? obj.ToString(Formatting.None) : null;
         }
