@@ -27,7 +27,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets the name of the property that changed. Returns the name of the property that changed.
         /// </summary>
-        public virtual string PropertyName
+        public string PropertyName
         {
             get
             {
