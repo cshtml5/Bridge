@@ -14,6 +14,13 @@ namespace System
             get;
         }
 
+        //CSHTML5 - Added to support Delegate.Method.Invoke(...)
+        public MethodInfo Method
+        {
+            [Bridge.Template("{this}")]
+            get;
+        }
+
         protected extern Delegate(object target, string method);
 
         protected extern Delegate(Type target, string method);
@@ -26,11 +33,14 @@ namespace System
 
         public virtual extern object Apply(object thisArg, Array args);
 
-        public virtual extern object Call(object thisArg, params object[] args);
+        //CSHTML5 - Changed from public to internal because it does not exist in Mscorlib
+        internal virtual extern object Call(object thisArg, params object[] args);
 
-        public virtual extern object Call(object thisArg);
+        //CSHTML5 - Changed from public to internal because it does not exist in Mscorlib
+        internal virtual extern object Call(object thisArg);
 
-        public virtual extern object Call();
+        //CSHTML5 - Changed from public to internal because it does not exist in Mscorlib
+        internal virtual extern object Call();
 
         [Bridge.Template("Bridge.fn.combine({0}, {1})")]
         public static extern Delegate Combine(Delegate a, Delegate b);
