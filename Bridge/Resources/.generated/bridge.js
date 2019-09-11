@@ -4521,6 +4521,10 @@
             }
 
             var orig = method;
+            //CSHTML5 - modification so that this method also works with Delegates instead of MethodInfo.
+            if (orig === undefined) {
+                orig = mi;
+            }
 
             method = function () {
                 var args = [],
