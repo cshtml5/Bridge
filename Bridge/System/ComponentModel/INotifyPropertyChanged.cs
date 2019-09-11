@@ -11,7 +11,7 @@ namespace System.ComponentModel
 
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Bridge.External]
-    public class PropertyChangedEventArgs : Bridge.IBridgeClass
+    public class PropertyChangedEventArgs : EventArgs, Bridge.IBridgeClass
     {
         private readonly string propertyName;
 
@@ -27,7 +27,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets the name of the property that changed. Returns the name of the property that changed.
         /// </summary>
-        public string PropertyName
+        public virtual string PropertyName
         {
             get
             {
