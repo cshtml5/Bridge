@@ -5,7 +5,7 @@ namespace System
 {
     [Bridge.Convention(Member = Bridge.ConventionMember.Field | Bridge.ConventionMember.Method, Notation = Bridge.Notation.CamelCase)]
     [Bridge.External]
-    public abstract class Type
+    public abstract class Type : MemberInfo
     {
         public extern string FullName
         {
@@ -31,7 +31,7 @@ namespace System
             get;
         }
 
-        public extern string Name
+        public override extern string Name
         {
             [Bridge.Template("Bridge.Reflection.getTypeName({this})")]
             get;
@@ -82,7 +82,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is abstract and must be overridden.
         /// </summary>
-        public extern bool IsAbstract
+        public override extern bool IsAbstract
         {
             [Bridge.Template("Bridge.Reflection.isAbstract({this})")]
             get;
@@ -91,7 +91,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is declared sealed.
         /// </summary>
-        public extern bool IsSealed
+        public override extern bool IsSealed
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 256)  != 0)")]
             get;
@@ -100,7 +100,7 @@ namespace System
         /// <summary>
         /// Gets the type that declares the current nested type or generic type parameter.
         /// </summary>
-        public extern Type DeclaringType
+        public override extern Type DeclaringType
         {
             [Bridge.Template("Bridge.Reflection.getMetaValue({this}, \"td\", null)")]
             get;
@@ -121,15 +121,6 @@ namespace System
         public extern TypeAttributes Attributes
         {
             [Bridge.Template("Bridge.Reflection.getMetaValue({this}, \"att\", 0)")]
-            get;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the current Type object has type parameters that have not been replaced by specific types.
-        /// </summary>
-        public extern bool ContainsGenericParameters
-        {
-            [Bridge.Template("Bridge.Reflection.containsGenericParameters({this})")]
             get;
         }
 
@@ -201,10 +192,10 @@ namespace System
         }
 
         [Bridge.Template("Bridge.Reflection.getAttributes({this}, null, {inherit})")]
-        public extern object[] GetCustomAttributes(bool inherit);
+        public override extern object[] GetCustomAttributes(bool inherit);
 
         [Bridge.Template("Bridge.Reflection.getAttributes({this}, {attributeType}, {inherit})")]
-        public extern object[] GetCustomAttributes(Type attributeType, bool inherit);
+        public override extern object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         [Bridge.Template("Bridge.Reflection.isInstanceOfType({instance}, {this})")]
         public extern bool IsInstanceOfType(object instance);
@@ -372,7 +363,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is declared public.
         /// </summary>
-        public extern bool IsPublic
+        public override extern bool IsPublic
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 1)")]
             get;
