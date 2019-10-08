@@ -12,13 +12,13 @@ namespace System.Reflection
         }
 
         [Bridge.Name("n")]
-        public extern string Name
+        public virtual extern string Name
         {
             get;
         }
 
         [Bridge.Name("td")]
-        public extern Type DeclaringType
+        public virtual extern Type DeclaringType
         {
             get;
         }
@@ -41,13 +41,13 @@ namespace System.Reflection
             get;
         }
 
-        public extern bool IsAbstract
+        public virtual extern bool IsAbstract
         {
             [Bridge.Template("({this}.ab || false)")]
             get;
         }
 
-        public extern bool IsSealed
+        public virtual extern bool IsSealed
         {
             [Bridge.Template("({this}.sl || false)")]
             get;
@@ -83,7 +83,7 @@ namespace System.Reflection
             get;
         }
 
-        public extern bool IsPublic
+        public virtual extern bool IsPublic
         {
             [Bridge.Template("({this}.a === 2)")]
             get;
@@ -101,7 +101,7 @@ namespace System.Reflection
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
         [Bridge.Template("System.Attribute.getCustomAttributes({this}, false, {inherit})")]
-        public extern object[] GetCustomAttributes(bool inherit);
+        public virtual extern object[] GetCustomAttributes(bool inherit);
 
         /// <summary>
         /// Returns an array of custom attributes applied to this member and identified by <see cref="T:System.Type"/>.
@@ -110,7 +110,7 @@ namespace System.Reflection
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
         [Bridge.Template("System.Attribute.getCustomAttributes({this}, {attributeType}, {inherit})")]
-        public extern object[] GetCustomAttributes(Type attributeType, bool inherit);
+        public virtual extern object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         /// <summary>
         /// Returns an array of all custom attributes applied to this member.
