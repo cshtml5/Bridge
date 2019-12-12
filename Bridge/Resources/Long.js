@@ -422,6 +422,14 @@
         }
     };
 
+    System.Int64.equals = function (v1, v2) {
+        if (Bridge.is(v1, System.Int64) && Bridge.is(v2, System.Int64)) {
+            return Bridge.unbox(v1, true).value.eq(Bridge.unbox(v2, true).value);
+        }
+        return false;
+    };
+
+
     System.Int64.divRem = function (a, b, result) {
         a = System.Int64(a);
         b = System.Int64(b);
