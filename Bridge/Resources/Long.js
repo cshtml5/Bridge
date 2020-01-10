@@ -365,6 +365,10 @@
     };
 
     System.Int64.prototype.equals = function (l) {
+        //todo: check this.
+        if (l == null) {
+            return false;
+        }
         return this.value.eq(this.T.getValue(l));
     };
 
