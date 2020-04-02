@@ -7,7 +7,7 @@ namespace System
     [Bridge.External]
     public abstract class Type
     {
-        public extern string FullName
+        public abstract string FullName
         {
             [Bridge.Template("Bridge.Reflection.getTypeFullName({this})")]
             get;
@@ -16,7 +16,7 @@ namespace System
         /// <summary>
         /// Gets the type from which the current Type directly inherits.
         /// </summary>
-        public extern Type BaseType
+        public abstract Type BaseType
         {
             [Bridge.Template("Bridge.Reflection.getBaseType({this})")]
             get;
@@ -25,25 +25,25 @@ namespace System
         [Bridge.Template("Bridge.Reflection.isAssignableFrom({this}, {type})")]
         public extern bool IsAssignableFrom(Type type);
 
-        public extern string AssemblyQualifiedName
+        public abstract string AssemblyQualifiedName
         {
             [Bridge.Template("Bridge.Reflection.getTypeQName({this})")]
             get;
         }
 
-        public extern string Name
+        public abstract string Name
         {
             [Bridge.Template("Bridge.Reflection.getTypeName({this})")]
             get;
         }
 
-        public extern string Namespace
+        public abstract string Namespace
         {
             [Bridge.Template("Bridge.Reflection.getTypeNamespace({this})")]
             get;
         }
 
-        public extern Assembly Assembly
+        public abstract Assembly Assembly
         {
             [Bridge.Template("Bridge.Reflection.getTypeAssembly({this})")]
             get;
@@ -58,7 +58,7 @@ namespace System
         [Bridge.Template("Bridge.Reflection.getGenericTypeDefinition({this})")]
         public extern Type GetGenericTypeDefinition();
 
-        public extern bool IsGenericTypeDefinition
+        public virtual bool IsGenericTypeDefinition
         {
             [Bridge.Template("Bridge.Reflection.isGenericTypeDefinition({this})")]
             get;
@@ -67,7 +67,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the current type is a generic type.
         /// </summary>
-        public extern bool IsGenericType
+        public virtual bool IsGenericType
         {
             [Bridge.Template("Bridge.Reflection.isGenericType({this})")]
             get;
@@ -82,7 +82,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is abstract and must be overridden.
         /// </summary>
-        public extern bool IsAbstract
+        public bool IsAbstract
         {
             [Bridge.Template("Bridge.Reflection.isAbstract({this})")]
             get;
@@ -91,7 +91,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is declared sealed.
         /// </summary>
-        public extern bool IsSealed
+        public bool IsSealed
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 256)  != 0)")]
             get;
@@ -100,7 +100,7 @@ namespace System
         /// <summary>
         /// Gets the type that declares the current nested type or generic type parameter.
         /// </summary>
-        public extern Type DeclaringType
+        public Type DeclaringType
         {
             [Bridge.Template("Bridge.Reflection.getMetaValue({this}, \"td\", null)")]
             get;
@@ -109,7 +109,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the current Type object represents a type whose definition is nested inside the definition of another type.
         /// </summary>
-        public extern bool IsNested
+        public bool IsNested
         {
             [Bridge.Template("(Bridge.Reflection.getMetaValue({this}, \"td\", null) != null)")]
             get;
@@ -118,7 +118,7 @@ namespace System
         /// <summary>
         /// Gets the attributes associated with the Type.
         /// </summary>
-        public extern TypeAttributes Attributes
+        public TypeAttributes Attributes
         {
             [Bridge.Template("Bridge.Reflection.getMetaValue({this}, \"att\", 0)")]
             get;
@@ -127,7 +127,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the current Type object has type parameters that have not been replaced by specific types.
         /// </summary>
-        public extern bool ContainsGenericParameters
+        public virtual bool ContainsGenericParameters
         {
             [Bridge.Template("Bridge.Reflection.containsGenericParameters({this})")]
             get;
@@ -136,7 +136,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the current Type represents a type parameter in the definition of a generic type or method.
         /// </summary>
-        public extern bool IsGenericParameter
+        public virtual bool IsGenericParameter
         {
             [Bridge.Template("({this}.$isTypeParameter || false)")]
             get;
@@ -145,13 +145,13 @@ namespace System
         /// <summary>
         /// Gets the position of the type parameter in the type parameter list of the generic type or method that declared the parameter, when the Type object represents a type parameter of a generic type or a generic method.
         /// </summary>
-        public extern int GenericParameterPosition
+        public virtual int GenericParameterPosition
         {
             [Bridge.Template("Bridge.Reflection.genericParameterPosition({this})")]
             get;
         }
 
-        public extern MethodInfo DeclaringMethod
+        public virtual MethodInfo DeclaringMethod
         {
             [Bridge.Template("Bridge.Reflection.getMetaValue({this}, \"md\", null)")]
             get;
@@ -165,18 +165,18 @@ namespace System
         public extern Type[] GetGenericArguments();
 
         [Bridge.Template("Bridge.Reflection.getInterfaces({this})")]
-        public extern Type[] GetInterfaces();
+        public abstract Type[] GetInterfaces();
 
         [Bridge.Template("({this}.prototype instanceof {type})")]
         public extern bool IsSubclassOf(Type type);
 
-        public extern bool IsClass
+        public bool IsClass
         {
             [Bridge.Template("Bridge.Reflection.isClass({this})")]
             get;
         }
 
-        public extern bool IsEnum
+        public virtual bool IsEnum
         {
             [Bridge.Template("Bridge.Reflection.isEnum({this})")]
             get;
@@ -188,23 +188,23 @@ namespace System
             get;
         }
 
-        public extern bool IsInterface
+        public bool IsInterface
         {
             [Bridge.Template("Bridge.Reflection.isInterface({this})")]
             get;
         }
 
-        public extern bool IsArray
+        public bool IsArray
         {
             [Bridge.Template("Bridge.isArray(null, {this})")]
             get;
         }
 
         [Bridge.Template("Bridge.Reflection.getAttributes({this}, null, {inherit})")]
-        public extern object[] GetCustomAttributes(bool inherit);
+        public abstract object[] GetCustomAttributes(bool inherit);
 
         [Bridge.Template("Bridge.Reflection.getAttributes({this}, {attributeType}, {inherit})")]
-        public extern object[] GetCustomAttributes(Type attributeType, bool inherit);
+        public abstract object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         [Bridge.Template("Bridge.Reflection.isInstanceOfType({instance}, {this})")]
         public extern bool IsInstanceOfType(object instance);
@@ -307,12 +307,12 @@ namespace System
         /// </summary>
         /// <returns>The Type of the object encompassed or referred to by the current array, pointer, or reference type, or null if the current Type is not an array or a pointer, or is not passed by reference, or represents a generic type or a type parameter in the definition of a generic type or generic method.</returns>
         [Bridge.Template("({this}.$elementType || null)")]
-        public extern Type GetElementType();
+        public abstract Type GetElementType();
 
         /// <summary>
         /// Gets a value indicating whether the current Type encompasses or refers to another type; that is, whether the current Type is an array, a pointer, or is passed by reference.
         /// </summary>
-        public extern bool HasElementType
+        public abstract bool HasElementType
         {
             [Bridge.Template("(!!{this}.$elementType)")]
             get;
@@ -372,7 +372,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is declared public.
         /// </summary>
-        public extern bool IsPublic
+        public bool IsPublic
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 1)")]
             get;
@@ -381,7 +381,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is not declared public.
         /// </summary>
-        public extern bool IsNotPublic
+        public bool IsNotPublic
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 0)")]
             get;
@@ -390,7 +390,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether a class is nested and declared public.
         /// </summary>
-        public extern bool IsNestedPublic
+        public bool IsNestedPublic
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 2)")]
             get;
@@ -399,7 +399,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is nested and declared private.
         /// </summary>
-        public extern bool IsNestedPrivate
+        public bool IsNestedPrivate
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 3)")]
             get;
@@ -408,7 +408,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is nested and visible only within its own family.
         /// </summary>
-        public extern bool IsNestedFamily
+        public bool IsNestedFamily
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 4)")]
             get;
@@ -417,7 +417,7 @@ namespace System
         /// <summary>
         /// Gets a value indicating whether the Type is nested and visible only within its own assembly.
         /// </summary>
-        public extern bool IsNestedAssembly
+        public bool IsNestedAssembly
         {
             [Bridge.Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 5)")]
             get;
@@ -426,13 +426,13 @@ namespace System
         [Bridge.Template("Bridge.getTypeName({this})")]
         public override extern string ToString();
 
-        public extern bool IsValueType
+        public bool IsValueType
         {
             [Bridge.Template("Bridge.Reflection.isValueType({this})")]
             get;
         }
 
-        public extern bool IsPrimitive
+        public abstract bool IsPrimitive
         {
             [Bridge.Template("Bridge.Reflection.isPrimitive({this})")]
             get;
