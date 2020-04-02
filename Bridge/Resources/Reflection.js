@@ -430,6 +430,11 @@
                 return false;
             }
 
+            var underlyingType = System.Nullable.getUnderlyingType(baseType);
+            if (underlyingType != null) {
+                baseType = underlyingType;
+            }
+
             if (baseType === type || Bridge.isObject(baseType)) {
                 return true;
             }
