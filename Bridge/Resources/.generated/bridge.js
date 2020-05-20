@@ -1,7 +1,7 @@
 /**
  * @version   : 17.9.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @copyright : Copyright 2008-2019 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2020 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -4521,6 +4521,7 @@
             }
 
             var orig = method;
+
             //CSHTML5 - modification so that this method also works with Delegates instead of MethodInfo.
             if (orig === undefined) {
                 orig = mi;
@@ -23355,19 +23356,30 @@ if (typeof window !== 'undefined' && window.performance && window.performance.no
 
     // @source INotifyPropertyChanged.js
 
-    Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
-        $kind: "interface"
-    });
+Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
+    $kind: "interface"
+});
 
-    Bridge.define("System.ComponentModel.PropertyChangedEventArgs", {
-        ctor: function (propertyName, newValue, oldValue) {
-            this.$initialize();
-            this.propertyName = propertyName;
-            this.newValue = newValue;
-            this.oldValue = oldValue;
+Bridge.define("System.ComponentModel.PropertyChangedEventArgs", {
+    fields: {
+        propertyName: null
+    },
+
+    config: {
+        properties: {
+            PropertyName: {
+                get: function () {
+                    return this.propertyName;
+                }
+            }
         }
-    });
+    },
 
+    ctor: function (propertyName) {
+        this.$initialize();
+        this.propertyName = propertyName;
+    }
+});
     // @source Convert.js
 
     var scope = {};

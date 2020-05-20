@@ -1284,7 +1284,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector})")]
-        public static extern IEnumerable<Grouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector);
 
         /// <summary>
@@ -1348,7 +1348,7 @@ namespace System.Linq
         /// source or keySelector or elementSelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, {elementSelector})")]
-        public static extern IEnumerable<Grouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
+        public static extern IEnumerable<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
             this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector);
 
         /// <summary>
@@ -1379,7 +1379,7 @@ namespace System.Linq
         /// source or keySelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, null, null, {comparer})")]
-        public static extern IEnumerable<Grouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
+        public static extern IEnumerable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer);
 
         /// <summary>
@@ -1490,7 +1490,7 @@ namespace System.Linq
         /// source or keySelector or elementSelector is null.
         /// </exception>
         [Bridge.Template("System.Linq.Enumerable.from({source}).groupBy({keySelector}, {elementSelector}, null, {comparer})")]
-        public static extern IEnumerable<Grouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
+        public static extern IEnumerable<IGrouping<TKey, TElement>> GroupBy<TSource, TKey, TElement>(
             this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey> comparer);
 
